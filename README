@@ -1,0 +1,31 @@
+Simple "look-ahead" word completion service using Levenshtein distance algorithm
+to find closest matches. Meant to be used in conjunction with AJAX call in text
+box.
+
+REQUIRES: cherrypy, pyyaml
+
+INSTALL: 
+install cherrypy and pyyaml 
+
+run ./Lev.py
+
+Browse to localhost:8080
+
+Comes with two example yaml files full of motorcycle parts and animals.
+
+Example: lookup "engine shroud" by typing "shroud"
+
+http://localhost:8080/parts/?word=s
+["back rest", "foot peg", "handle bar", "seat", "spokes", "spring"]
+http://localhost:8080/parts/?word=sh
+["leg shroud", "hub", "wind shield", "foot peg", "engine shroud", "back rest"]
+http://localhost:8080/parts/?word=shr
+["wheel rim", "leg shroud", "engine shroud", "handle bar", "hub"]
+http://localhost:8080/parts/?word=shro
+["engine shroud", "leg shroud", "hub", "back rest"]
+
+It handles mispellings pretty well
+http://localhost:8080/animals/?word=shrrew
+["shrew", "ferret", "hare"]
+
+Great fun to play with, and not particularly slow!
