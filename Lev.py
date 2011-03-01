@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import cherrypy, yaml, json
 __author__ = "kphretiq@gmail.com"
