@@ -13,15 +13,15 @@ Browse to localhost:8080
 
 Comes with two example yaml files full of motorcycle parts and animals.
 
-Example: lookup "engine shroud" by typing "shroud"
+example lookup for "engine shroud" by typing "shroud"
 
-http://localhost:8080/parts/?word=s
+http://localhost:8080/motorbike_parts/?word=s
 ["back rest", "foot peg", "handle bar", "seat", "spokes", "spring"]
-http://localhost:8080/parts/?word=sh
+http://localhost:8080/motorbike_parts/?word=sh
 ["leg shroud", "hub", "wind shield", "foot peg", "engine shroud", "back rest"]
-http://localhost:8080/parts/?word=shr
+http://localhost:8080/motorbike_parts/?word=shr
 ["wheel rim", "leg shroud", "engine shroud", "handle bar", "hub"]
-http://localhost:8080/parts/?word=shro
+http://localhost:8080/motorbike_parts/?word=shro
 ["engine shroud", "leg shroud", "hub", "back rest"]
 
 It handles mispellings pretty well
