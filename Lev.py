@@ -10,13 +10,13 @@ box.
 
 example lookup for "engine shroud" by typing "shroud"
 
-http://localhost:8080/parts/?word=s
+http://localhost:8080/motorbike_parts/?word=s
 ["back rest", "foot peg", "handle bar", "seat", "spokes", "spring"]
-http://localhost:8080/parts/?word=sh
+http://localhost:8080/motorbike_parts/?word=sh
 ["leg shroud", "hub", "wind shield", "foot peg", "engine shroud", "back rest"]
-http://localhost:8080/parts/?word=shr
+http://localhost:8080/motorbike_parts/?word=shr
 ["wheel rim", "leg shroud", "engine shroud", "handle bar", "hub"]
-http://localhost:8080/parts/?word=shro
+http://localhost:8080/motorbike_parts/?word=shro
 ["engine shroud", "leg shroud", "hub", "back rest"]
 
 It handles mispellings pretty well
@@ -99,15 +99,16 @@ class Lev(object):
     # lookup happens here
     @cherrypy.expose
     def index(self, word=False):
-        if word:
-            l = self.complete(word) + self.split_string(word)
-            l.sort()
-            final = []
-            for word in l:
-                if not word[1] in final:
-                    final.append(word[1])
-            return json.dumps(final)
-        return json.dumps(None)
+        if not word:
+            return json.dumps(word)
+        l = self.complete(word) + self.split_string(word)
+        l.sort()
+        final = []
+        # maintain word order
+        for word in l:
+            if not word[1] in final:
+                final.append(word[1])
+        return json.dumps(final)
 
 class Finder(object):
     # just add more paths here
@@ -115,12 +116,15 @@ class Finder(object):
     # muffin_tops = Lev("muffins.yaml")
     # call with localhost:8080/muffin_tops?word=choco chip
     # or whatever turns you on.
+    # Note that there is nothing here to handle incorrect paths, nor is
+    # a default lookup provided for the root object, A query on root
+    # just echoes.
     motorbike_parts = Lev("motorbike_parts.yaml")
     animals = Lev("animals.yaml")
     
     @cherrypy.expose
-    def index(self, arf=False):
-        return "hi there"
+    def index(self, word=False):
+        return json.dumps(word)
 
 # You will most likely want to handle this a bit better should you decide
 # to use this! :-)
