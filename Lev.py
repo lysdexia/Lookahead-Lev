@@ -116,16 +116,22 @@ class Finder(object):
     # muffin_tops = Lev("muffins.yaml")
     # call with localhost:8080/muffin_tops?word=choco chip
     # or whatever turns you on.
-    # Note that there is nothing here to handle incorrect paths, nor is
-    # a default lookup provided for the root object, A query on root
-    # just echoes.
     motorbike_parts = Lev("motorbike_parts.yaml")
     animals = Lev("animals.yaml")
     
+    # nothing set for root ... 
     @cherrypy.expose
-    def index(self, word=False):
-        return json.dumps(word)
+    def index(self, *args, **kwargs):
+        return self.err(args, kwargs)
 
+    # ... or default. Just echo back with an error message.
+    @cherrypy.expose
+    def default(self, *args, **kwargs):
+        return self.err(args, kwargs)
+
+    # default error dump. 
+    def err(self, *args, **kwargs):
+        return json.dumps({"error": "lookup path not found", "args": args, "kwargs": kwargs})
 # You will most likely want to handle this a bit better should you decide
 # to use this! :-)
 root = Finder()
