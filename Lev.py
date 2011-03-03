@@ -94,8 +94,7 @@ class Lev(object):
 
         close = [i for i in pos if word in i[1]]
         notso = [i for i in pos if not i in close]
-        close = [i for i in close + notso]
-        return close[0:LIMIT]
+        return [i for i in close + notso][0: LIMIT]
 
     # lookup happens here
     @cherrypy.expose
