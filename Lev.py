@@ -55,7 +55,8 @@ class Lev(object):
         # build our matrix
         firstWord_length = len(firstWord) + 1
         secondWord_length = len(secondWord) + 1
-        matrix = [range(secondWord_length) for i in range(firstWord_length)]
+        matrix = [[x for x in range(secondWord_length)]
+                        for i in range(firstWord_length)]
     
         # March through and count the changes needed to make firstWord ==
 		# secondWord
